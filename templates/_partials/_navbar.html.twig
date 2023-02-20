@@ -10,4 +10,21 @@
             <a class="nav-link text-white" href="#">Pricing</a>
         </div>
     </div>
+      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+        {%  if app.user %}
+           <li class="nav-item">
+               <a class="nav-link text-white" href="#">Mon Compte</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link text-white" href="{{ path('app_logout') }}">Logout</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+               <a class="nav-link text-white" href="{{ path('app_login') }}">Sign in</a>
+            </li>
+            <li class="nav-item">
+               <a class="nav-link text-white" href="{{ path('app_register') }}">Sign up</a>
+            </li>
+            {% endif %}
+        </ul>
 </nav>
