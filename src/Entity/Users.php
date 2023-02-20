@@ -46,7 +46,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 150)]
     private ?string $city = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'datetime_immutable', options: ['default'=> 'CURRENT_TIMESTAMP' ])]
     private ?\DateTimeImmutable $create_at = null;
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Orders::class)]
@@ -55,6 +55,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->create_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
