@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\OrdersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -19,8 +20,7 @@ class Orders
     #[ORM\Column(length: 20)]
     private ?string $reference = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $created_at = null;
+    use CreatedAtTrait;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
     private ?Coupons $coupons = null;
@@ -35,6 +35,7 @@ class Orders
     public function __construct()
     {
         $this->ordersDetails = new ArrayCollection();
+        $this->create_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -50,18 +51,6 @@ class Orders
     public function setReference(string $reference): self
     {
         $this->reference = $reference;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $created_at): self
-    {
-        $this->created_at = $created_at;
 
         return $this;
     }

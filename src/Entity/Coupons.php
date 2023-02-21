@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\CouponsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,6 +16,8 @@ class Coupons
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
+    use CreatedAtTrait;
 
     #[ORM\Column(length: 10, unique : true)]
     private ?string $code = null;
@@ -34,9 +37,6 @@ class Coupons
     #[ORM\Column]
     private ?bool $is_vakid = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
-
     #[ORM\ManyToOne(inversedBy: 'coupons')]
     #[ORM\JoinColumn(nullable: false)]
     private ?CouponsTypes $coupons_types = null;
@@ -47,6 +47,7 @@ class Coupons
     public function __construct()
     {
         $this->orders = new ArrayCollection();
+        $this->create_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -122,18 +123,6 @@ class Coupons
     public function setIsVakid(bool $is_vakid): self
     {
         $this->is_vakid = $is_vakid;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
-    {
-        $this->created_at = $created_at;
 
         return $this;
     }

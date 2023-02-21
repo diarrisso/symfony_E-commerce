@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\CouponsTypesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,9 +22,12 @@ class CouponsTypes
     #[ORM\OneToMany(mappedBy: 'coupons_types', targetEntity: Coupons::class)]
     private Collection $coupons;
 
+    use CreatedAtTrait;
+
     public function __construct()
     {
         $this->coupons = new ArrayCollection();
+        $this->create_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

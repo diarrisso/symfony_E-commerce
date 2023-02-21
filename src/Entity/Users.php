@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\UsersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -46,8 +47,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 150)]
     private ?string $city = null;
 
-    #[ORM\Column(type: 'datetime_immutable', options: ['default'=> 'CURRENT_TIMESTAMP' ])]
-    private ?\DateTimeImmutable $create_at = null;
+    use CreatedAtTrait;
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Orders::class)]
     private Collection $orders;
@@ -187,19 +187,6 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    public function getCreateAt(): ?\DateTimeImmutable
-    {
-        return $this->create_at;
-    }
-
-    public function setCreateAt(\DateTimeImmutable $create_at): self
-    {
-        $this->create_at = $create_at;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Orders>
      */
