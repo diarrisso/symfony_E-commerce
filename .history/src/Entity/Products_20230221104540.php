@@ -15,7 +15,6 @@ class Products
 {
 
    use SlugTrait;
-   use CreatedAtTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -33,6 +32,8 @@ class Products
 
     #[ORM\Column]
     private ?int $stock = null;
+
+    use CreatedAtTrait;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]

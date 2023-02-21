@@ -12,8 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: OrdersRepository::class)]
 class Orders
 {
-    use CreatedAtTrait;
-    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -21,6 +19,8 @@ class Orders
 
     #[ORM\Column(length: 20)]
     private ?string $reference = null;
+
+    use CreatedAtTrait;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
     private ?Coupons $coupons = null;

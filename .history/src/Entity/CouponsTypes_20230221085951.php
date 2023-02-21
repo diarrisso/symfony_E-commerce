@@ -11,8 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CouponsTypesRepository::class)]
 class CouponsTypes
 {
-    use CreatedAtTrait;
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -23,6 +21,8 @@ class CouponsTypes
 
     #[ORM\OneToMany(mappedBy: 'coupons_types', targetEntity: Coupons::class)]
     private Collection $coupons;
+
+    use CreatedAtTrait;
 
     public function __construct()
     {
