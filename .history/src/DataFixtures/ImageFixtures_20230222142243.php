@@ -4,11 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Images;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
 
-class ImageFixtures extends Fixture implements DependentFixtureInterface
+class ImageFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
@@ -17,24 +16,17 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
 
         for ($img= 1; $img <= 10; $img++)
          {
-            $image = new Images();
-            $image->setName($faker->image(null, 640, 480));
+            $img = new Images();
+            $img->setName($faker->image(null, 640, 480));
             // getPrducts for img;
             $products = $this->getReference('prod_'.rand(1, 10));
         
-            $image->setProducts($products);
+            $img->setProducts($products);
 
-            $manager->persist($image);
+            $manager->persist($img);
         
         }
 
         $manager->flush();
-    }
-
-    public function getDependencies()
-     {
-        return [
-            ProductFixtures::class
-        ];
     }
 }

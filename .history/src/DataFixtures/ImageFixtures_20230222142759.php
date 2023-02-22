@@ -4,11 +4,10 @@ namespace App\DataFixtures;
 
 use App\Entity\Images;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
 
-class ImageFixtures extends Fixture implements DependentFixtureInterface
+class ImageFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
@@ -29,12 +28,5 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
         }
 
         $manager->flush();
-    }
-
-    public function getDependencies()
-     {
-        return [
-            ProductFixtures::class
-        ];
     }
 }
