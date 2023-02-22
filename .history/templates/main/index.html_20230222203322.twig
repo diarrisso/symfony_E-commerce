@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}title{% endblock %}
+
+{% block body %}
+
+<main class="container">
+   <section class="row">
+      <div class="col-12">
+        <h1>Welcomm to my OnlineShop</h1>
+        <p> Site E-commerce pour les marchands </p>
+      </div>
+      {% for category in categorie %}
+        {% if category.parent == null %}
+        <div class="col-12">
+           {{ category.name}}
+        </div>
+        {% else  %}
+        <div class="col-12">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ category.name}}</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+   </section>
+    {% endfor %}
+</main>
+
+{% endblock %}
+

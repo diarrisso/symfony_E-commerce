@@ -10,7 +10,7 @@ trait SlugTrait {
     private $slug;
 
     
-    public function getSlug()
+    public function getSlug(): ?\DateTimeImmutable
     {
         return $this->slug;
     }

@@ -58,6 +58,7 @@ class Categories
         return $this;
     }
 
+
     public function getCategoryOrder()
     {
         return $this->categoryOrder;

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}title{% endblock %}
+
+{% block body %}
+
+<main class="container">
+   <section class="row">
+      <div class="col-12">
+      {% for category in categorie %}
+        <h1> {{ category.name}} </h1>
+        <p> Site E-commerce pour les marchands </p>
+      </div>
+   </section>
+</main>
+
+{% endblock %}
+
