@@ -50,6 +50,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $is_Verified = false;
 
+    #[ORM\Column(type: 'string', length: 100)]
+    private $reseToken;
+
     use CreatedAtTrait;
 
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: Orders::class)]
@@ -217,6 +220,22 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReseToken()
+    {
+        return $this->reseToken;
+    }
+
+    /**
+     * @param mixed $reseToken
+     */
+    public function setReseToken($reseToken): void
+    {
+        $this->reseToken = $reseToken;
     }
 
     public function removeOrder(Orders $order): self
