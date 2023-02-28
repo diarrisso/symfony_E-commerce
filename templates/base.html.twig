@@ -18,6 +18,20 @@
     </head>
     <body>
         {% include "_partials/_navbar.html.twig" %}
+        {% if app.user and app.user.isVerified == false %}
+
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="alert-message">
+            <strong>votre compte n'est pas aciter , veuillez activer votre compte</strong>
+            </div>
+        </div>
+        
+        {% endif %}
+         {% include "_partials/_flash.html.twig" %}
+        
         {% block body %}{% endblock %}
          {% include "_partials/_footer.html.twig" %}
        
