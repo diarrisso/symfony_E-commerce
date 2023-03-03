@@ -11,20 +11,26 @@
         <div class="col-12">
             <h1>liste de tous les products</h1>
         </div>
-        {% for product in products %}
+        {% for product in products.data %}
         <div class="col-3  mb-3">
            <div class="card h-100">
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{ product.description }}</p>
+                    <a href="{{ path('app_productsdetails', {"slug": product.slug}) }}">voir les details du produits</a>
         
                 </div>
             </div>
         </div>
         {% endfor %}
+        {%  set path = 'category_liste' %}
+        {%  set slug =  categories.slug %}
+        {%  set pages = products.pages %}
+        {%  set currentPage = products.page %}
     </section>
-</main>
+    {% include '_partials/_paginator.html.twig'%}
+</main> 
 
 
 
