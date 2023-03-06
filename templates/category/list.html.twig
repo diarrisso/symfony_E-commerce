@@ -14,7 +14,7 @@
         {% for product in products.data %}
         <div class="col-3  mb-3">
            <div class="card h-100">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="{{ asset('assets/uploads/Products/mini/300x300-' ~ product.images[0].name  ) }}" class="card-img-top" alt="{{ product.name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ product.name }}</h5>
                     <p class="card-text">{{ product.description }}</p>

@@ -5,10 +5,16 @@ namespace App\Form;
 use App\Entity\Categories;
 use App\Entity\Products;
 use App\Repository\CategoriesRepository;
+use phpDocumentor\Reflection\PseudoTypes\PositiveInteger;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\Positive;
 
 class ProductFormType extends AbstractType
 {
@@ -21,8 +27,15 @@ class ProductFormType extends AbstractType
             ->add('description', options: [
                 'label'=>'desription'
     ])
-            ->add('price', options: [
-                'label' => 'prix'
+            ->add('price', MoneyType::class, options: [
+                'label' => 'prix',
+                'divisor'=> 100,
+                'constraints' => [
+                    new Positive(
+
+                        message: 'le prix peut pas etre negative'
+                    )
+                ]
             ])
             ->add('stock', options: [
                 'label'=> 'quantite en stock'
@@ -39,6 +52,21 @@ class ProductFormType extends AbstractType
                      ->orderBy('c.name', 'ASC');
                }
            ])
+            ->add('images', FileType::class,[
+                'label'=> false,
+                'multiple'=> true,
+                'mapped'=> false,
+                'required' => false,
+                'constraints'=> [
+                    new All(
+                        new Image([
+                            'maxWidth' => 1280,
+                            'maxWidthMessage'=> 'l\'image doit {{ max_width }} pixel de la largeur maximunm'
+                        ])
+                    )
+                ]
+
+            ])
         ;
     }
 
